@@ -294,7 +294,7 @@ export default function AIZone() {
               onKeyDown={handleKeyDown}
               placeholder={mode === 'ama' ? "Ask me anything..." : "Type a franchise name..."}
               disabled={isLoading}
-              className="flex-1 min-w-0 text-[15px] py-3 px-4 rounded-full border border-white/20 bg-white/10 text-dark-text outline-none"
+              className="flex-1 min-w-0 text-base py-3 px-4 rounded-full border border-white/20 bg-white/10 text-dark-text outline-none"
             />
             <button
               data-debug="aizone-send-btn"
