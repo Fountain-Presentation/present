@@ -106,8 +106,8 @@ export default function AIZone() {
 
   return (
     <div data-aizone-wrapper className="sm:m-6">
-      <section data-debug="aizone-section" data-aizone-card className="rounded-none sm:rounded-[44px] md:rounded-2xl gradient-hero text-dark-text p-6">
-      <div className="max-w-[768px] mx-auto">
+      <section data-debug="aizone-section" data-aizone-card className="rounded-none sm:rounded-[44px] md:rounded-2xl gradient-hero text-dark-text p-6 overflow-x-clip">
+      <div className="max-w-[768px] mx-auto min-w-0">
         {/* Section Label */}
         <motion.p
           data-debug="aizone-label"
@@ -294,7 +294,7 @@ export default function AIZone() {
               onKeyDown={handleKeyDown}
               placeholder={mode === 'ama' ? "Ask me anything..." : "Type a franchise name..."}
               disabled={isLoading}
-              className="flex-1 text-[15px] py-3 px-4 rounded-full border border-white/20 bg-white/10 text-dark-text outline-none"
+              className="flex-1 min-w-0 text-[15px] py-3 px-4 rounded-full border border-white/20 bg-white/10 text-dark-text outline-none"
             />
             <button
               data-debug="aizone-send-btn"
