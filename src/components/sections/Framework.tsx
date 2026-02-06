@@ -234,6 +234,29 @@ export default function Framework() {
             </div>
           </div>
         </motion.div>
+
+        {/* Slack Parallel Callout */}
+        <motion.div
+          data-debug="framework-callout"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="gradient-hero rounded-[44px] p-6 mt-8"
+        >
+          <div className="glass rounded-xl py-5 px-6">
+            <p className="text-white text-sm font-semibold uppercase tracking-[0.15em] mb-3">The Slack Parallel</p>
+            <p className="text-white text-base leading-[1.75] mb-3">
+              Slack didn&apos;t sell to enterprises. They let teams adopt, spread internally, and create bottom-up pressure until corporate had to standardize.
+            </p>
+            <p className="text-white text-base leading-[1.75] mb-3">
+              <span className="font-semibold">Result:</span> 93% of $100K+ customers started bottom-up. 143% NRR at peak.
+            </p>
+            <p className="text-white text-base leading-[1.75] m-0">
+              Fountain&apos;s franchise play is the same motion — operators instead of teams, but identical dynamics. Adoption first, enterprise second.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
