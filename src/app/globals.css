@@ -1,26 +1,471 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #FAFAF8;
+  --text: #1A1A1A;
+  --accent: #0066FF;
+  --accent-warm: #F59E0B;
+  --dark-bg: #0D1117;
+  --dark-text: #E6EDF3;
+  --muted: #6B7280;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: #FAFAF8;
+  --color-text: #1A1A1A;
+  --color-accent: #0066FF;
+  --color-accent-warm: #F59E0B;
+  --color-dark-bg: #0D1117;
+  --color-dark-text: #E6EDF3;
+  --color-muted: #6B7280;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: #FAFAF8 !important;
+  color: #1A1A1A;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFAF8 !important;
+  color: #1A1A1A;
+  font-family: var(--font-general-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* AIZone glassmorphic scrollbar */
+.aizone-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.aizone-messages::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+}
+
+.aizone-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.aizone-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: content-box;
+}
+
+/* Firefox scrollbar */
+.aizone-messages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+/* Debug mode outlines */
+.debug-mode [data-debug] {
+  outline: 1px solid rgba(255, 0, 0, 0.5) !important;
+  outline-offset: -1px;
+}
+
+.debug-mode [data-debug]:hover {
+  outline: 2px solid rgba(255, 0, 0, 0.8) !important;
+}
+
+/* Spacing debug mode */
+.debug-spacing-mode [data-debug] {
+  outline: 1px dashed rgba(34, 197, 94, 0.5) !important;
+  outline-offset: -1px;
+}
+
+.debug-spacing-mode [data-debug]:hover {
+  outline: 2px dashed rgba(34, 197, 94, 0.8) !important;
+}
+
+/* Responsive debug viewport adjustments */
+.debug-viewport-sm [data-debug="context-section"],
+.debug-viewport-xs [data-debug="context-section"] {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.debug-viewport-sm [data-section-wrapper="context"],
+.debug-viewport-xs [data-section-wrapper="context"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Framework cards stack vertically on sm/xs */
+.debug-viewport-sm [data-framework-container],
+.debug-viewport-xs [data-framework-container] {
+  max-width: 100% !important;
+}
+
+.debug-viewport-sm [data-framework-row],
+.debug-viewport-xs [data-framework-row] {
+  flex-direction: column !important;
+}
+
+.debug-viewport-sm [data-framework-row] > *,
+.debug-viewport-xs [data-framework-row] > * {
+  width: 100% !important;
+}
+
+/* Scenario section adjustments on sm/xs */
+html.debug-viewport-sm [data-scenario-wrapper],
+html.debug-viewport-xs [data-scenario-wrapper] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+html.debug-viewport-sm [data-debug="scenario-section"],
+html.debug-viewport-xs [data-debug="scenario-section"] {
+  border-radius: 0 !important;
+}
+
+/* Metrics cards 1 per row on sm/xs */
+html.debug-viewport-sm [data-metrics-grid],
+html.debug-viewport-xs [data-metrics-grid] {
+  grid-template-columns: 1fr !important;
+}
+
+html.debug-viewport-sm [data-metric-dot],
+html.debug-viewport-xs [data-metric-dot] {
+  top: 32px !important;
+  right: 32px !important;
+}
+
+/* Hero section on sm/xs */
+html.debug-viewport-sm .hero-wrapper,
+html.debug-viewport-xs .hero-wrapper {
+  margin: 24px !important;
+  padding: 24px 0 0 0 !important;
+}
+
+html.debug-viewport-sm [data-debug="hero-section"],
+html.debug-viewport-xs [data-debug="hero-section"] {
+  padding: 80px 24px !important;
+}
+
+html.debug-viewport-sm [data-debug="hero-title"] {
+  font-size: 36px !important;
+}
+
+html.debug-viewport-xs [data-debug="hero-title"] {
+  font-size: 28px !important;
+}
+
+html.debug-viewport-sm [data-debug="hero-subtitle"] {
+  font-size: 16px !important;
+}
+
+html.debug-viewport-xs [data-debug="hero-eyebrow"] {
+  font-size: 11px !important;
+}
+
+html.debug-viewport-xs [data-debug="hero-subtitle"] {
+  font-size: 15px !important;
+}
+
+/* AIZone section on sm/xs */
+html.debug-viewport-sm [data-aizone-wrapper],
+html.debug-viewport-xs [data-aizone-wrapper] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+html.debug-viewport-sm [data-aizone-card],
+html.debug-viewport-xs [data-aizone-card] {
+  border-radius: 0 !important;
+  padding: 24px !important;
+}
+
+html.debug-viewport-sm [data-debug="aizone-messages-area"],
+html.debug-viewport-xs [data-debug="aizone-messages-area"] {
+  padding: 24px !important;
+}
+
+/* ===========================================
+   RESPONSIVE FONT SIZES
+   SM = 640px breakpoint
+   XS = 375px breakpoint
+   =========================================== */
+
+/* -------------------------------------------
+   CONTEXT SECTION
+   ------------------------------------------- */
+/* context-label: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="context-label"] {
+  font-size: 11px !important;
+}
+
+/* context-heading: Desktop 44px | SM 32px | XS 26px */
+html.debug-viewport-sm [data-debug="context-heading"] {
+  font-size: 32px !important;
+}
+html.debug-viewport-xs [data-debug="context-heading"] {
+  font-size: 26px !important;
+}
+
+/* context-body-1,2,3: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="context-body-1"],
+html.debug-viewport-sm [data-debug="context-body-2"],
+html.debug-viewport-sm [data-debug="context-body-3"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="context-body-1"],
+html.debug-viewport-xs [data-debug="context-body-2"],
+html.debug-viewport-xs [data-debug="context-body-3"] {
+  font-size: 15px !important;
+}
+
+/* context-body-4 (punchline): Desktop 20px | SM 18px | XS 16px */
+html.debug-viewport-sm [data-debug="context-body-4"] {
+  font-size: 18px !important;
+}
+html.debug-viewport-xs [data-debug="context-body-4"] {
+  font-size: 16px !important;
+}
+
+/* context-callout: Desktop 16px | SM 15px | XS 14px */
+html.debug-viewport-sm [data-debug="context-callout"] p {
+  font-size: 15px !important;
+}
+html.debug-viewport-xs [data-debug="context-callout"] p {
+  font-size: 14px !important;
+}
+
+/* -------------------------------------------
+   FRAMEWORK SECTION
+   ------------------------------------------- */
+/* framework-label: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="framework-label"] {
+  font-size: 11px !important;
+}
+
+/* framework-title: Desktop 44px | SM 32px | XS 26px */
+html.debug-viewport-sm [data-debug="framework-title"] {
+  font-size: 32px !important;
+}
+html.debug-viewport-xs [data-debug="framework-title"] {
+  font-size: 26px !important;
+}
+
+/* framework-intro: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="framework-intro"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="framework-intro"] {
+  font-size: 15px !important;
+}
+
+/* Framework cards - Stage number: Desktop 18px | SM 16px | XS 16px */
+html.debug-viewport-sm [data-debug^="framework-card-"] > p:first-child,
+html.debug-viewport-xs [data-debug^="framework-card-"] > p:first-child {
+  font-size: 16px !important;
+}
+
+/* Framework cards - Title: Desktop 16px | SM 15px | XS 14px */
+html.debug-viewport-sm [data-debug^="framework-card-"] > h3 {
+  font-size: 15px !important;
+}
+html.debug-viewport-xs [data-debug^="framework-card-"] > h3 {
+  font-size: 14px !important;
+}
+
+/* Framework cards - Label: Desktop 13px | SM 12px | XS 12px */
+html.debug-viewport-sm [data-debug^="framework-card-"] > p:nth-of-type(2),
+html.debug-viewport-xs [data-debug^="framework-card-"] > p:nth-of-type(2) {
+  font-size: 12px !important;
+}
+
+/* Framework cards - Tag: Desktop 10px | SM 10px | XS 10px (no change needed) */
+
+/* Framework cards - Description (expanded): Desktop 14px | SM 13px | XS 13px */
+html.debug-viewport-sm [data-debug^="framework-card-"] > div > div > p,
+html.debug-viewport-xs [data-debug^="framework-card-"] > div > div > p {
+  font-size: 13px !important;
+}
+
+/* Framework cards - Metric: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug^="framework-card-"] > div > div > div span {
+  font-size: 11px !important;
+}
+
+/* -------------------------------------------
+   SCENARIO SECTION
+   ------------------------------------------- */
+/* scenario-label: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="scenario-label"] {
+  font-size: 11px !important;
+}
+
+/* scenario-title: Desktop 40px | SM 32px | XS 26px */
+html.debug-viewport-sm [data-debug="scenario-title"] {
+  font-size: 32px !important;
+}
+html.debug-viewport-xs [data-debug="scenario-title"] {
+  font-size: 26px !important;
+}
+
+/* scenario-intro: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="scenario-intro"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="scenario-intro"] {
+  font-size: 15px !important;
+}
+
+/* Phase time pill: Desktop 11px | SM 11px | XS 10px */
+html.debug-viewport-xs [data-debug^="scenario-phase-"] > div > span {
+  font-size: 10px !important;
+}
+
+/* Phase title: Desktop 22px | SM 20px | XS 18px */
+html.debug-viewport-sm [data-debug^="scenario-phase-"] > h3 {
+  font-size: 20px !important;
+}
+html.debug-viewport-xs [data-debug^="scenario-phase-"] > h3 {
+  font-size: 18px !important;
+}
+
+/* Bullet text: Desktop 16px | SM 15px | XS 14px */
+html.debug-viewport-sm [data-debug^="scenario-phase-"] li span {
+  font-size: 15px !important;
+}
+html.debug-viewport-xs [data-debug^="scenario-phase-"] li span {
+  font-size: 14px !important;
+}
+
+/* -------------------------------------------
+   METRICS SECTION
+   ------------------------------------------- */
+/* metrics-label: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="metrics-label"] {
+  font-size: 11px !important;
+}
+
+/* metrics-title: Desktop 44px | SM 32px | XS 26px */
+html.debug-viewport-sm [data-debug="metrics-title"] {
+  font-size: 32px !important;
+}
+html.debug-viewport-xs [data-debug="metrics-title"] {
+  font-size: 26px !important;
+}
+
+/* metrics-intro: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="metrics-intro"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="metrics-intro"] {
+  font-size: 15px !important;
+}
+
+/* Row header: Desktop 11px | SM 11px | XS 10px */
+html.debug-viewport-xs [data-debug^="metrics-row-"] > p {
+  font-size: 10px !important;
+}
+
+/* Metric card name: Desktop 16px | SM 15px | XS 14px */
+html.debug-viewport-sm [data-debug^="metrics-card-"] h3 {
+  font-size: 15px !important;
+}
+html.debug-viewport-xs [data-debug^="metrics-card-"] h3 {
+  font-size: 14px !important;
+}
+
+/* Metric card description: Desktop 14px | SM 13px | XS 13px */
+html.debug-viewport-sm [data-debug^="metrics-card-"] > p:first-of-type,
+html.debug-viewport-xs [data-debug^="metrics-card-"] > p:first-of-type {
+  font-size: 13px !important;
+}
+
+/* Metric card target: Desktop 14px | SM 13px | XS 13px */
+html.debug-viewport-sm [data-debug^="metrics-card-"] > p:last-of-type,
+html.debug-viewport-xs [data-debug^="metrics-card-"] > p:last-of-type {
+  font-size: 13px !important;
+}
+
+/* Legend: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="metrics-legend"] span {
+  font-size: 11px !important;
+}
+
+/* -------------------------------------------
+   AIZONE SECTION
+   ------------------------------------------- */
+/* aizone-label: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="aizone-label"] {
+  font-size: 11px !important;
+}
+
+/* aizone-title: Desktop 44px | SM 32px | XS 26px */
+html.debug-viewport-sm [data-debug="aizone-title"] {
+  font-size: 32px !important;
+}
+html.debug-viewport-xs [data-debug="aizone-title"] {
+  font-size: 26px !important;
+}
+
+/* aizone-intro: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="aizone-intro"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="aizone-intro"] {
+  font-size: 15px !important;
+}
+
+/* Mode buttons: Desktop 14px | SM 14px | XS 13px */
+html.debug-viewport-xs [data-debug="aizone-btn-ama"],
+html.debug-viewport-xs [data-debug="aizone-btn-scenario"] {
+  font-size: 13px !important;
+}
+
+/* Chips: Desktop 14px | SM 13px | XS 13px */
+html.debug-viewport-sm [data-debug="aizone-chips"] button,
+html.debug-viewport-xs [data-debug="aizone-chips"] button {
+  font-size: 13px !important;
+}
+
+/* Messages: Desktop 15px | SM 14px | XS 14px */
+html.debug-viewport-sm [data-debug="aizone-messages-area"] > div > div > div,
+html.debug-viewport-xs [data-debug="aizone-messages-area"] > div > div > div {
+  font-size: 14px !important;
+}
+
+/* Input: Desktop 15px | SM 15px | XS 14px */
+html.debug-viewport-xs [data-debug="aizone-input-field"] {
+  font-size: 14px !important;
+}
+
+/* -------------------------------------------
+   CLOSER SECTION
+   ------------------------------------------- */
+/* closer-body-1,2: Desktop 18px | SM 16px | XS 15px */
+html.debug-viewport-sm [data-debug="closer-body-1"],
+html.debug-viewport-sm [data-debug="closer-body-2"] {
+  font-size: 16px !important;
+}
+html.debug-viewport-xs [data-debug="closer-body-1"],
+html.debug-viewport-xs [data-debug="closer-body-2"] {
+  font-size: 15px !important;
+}
+
+/* closer-signature: Desktop 20px | SM 18px | XS 16px */
+html.debug-viewport-sm [data-debug="closer-signature"] p {
+  font-size: 18px !important;
+}
+html.debug-viewport-xs [data-debug="closer-signature"] p {
+  font-size: 16px !important;
+}
+
+/* LinkedIn link: Desktop 14px | SM 13px | XS 13px */
+html.debug-viewport-sm [data-debug="closer-signature"] a,
+html.debug-viewport-xs [data-debug="closer-signature"] a {
+  font-size: 13px !important;
+}
+
+/* closer-footer: Desktop 12px | SM 12px | XS 11px */
+html.debug-viewport-xs [data-debug="closer-footer"] p {
+  font-size: 11px !important;
 }
