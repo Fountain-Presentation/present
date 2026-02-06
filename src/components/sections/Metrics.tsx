@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'motion/react'
+import { cn } from '@/lib/cn'
 
 const metricRows = [
   {
@@ -33,8 +34,8 @@ export default function Metrics() {
   let cardIndex = 0
 
   return (
-    <section data-debug="metrics-section" style={{ padding: '24px' }}>
-      <div style={{ maxWidth: '896px', margin: '0 auto' }}>
+    <section data-debug="metrics-section" className="p-6">
+      <div className="max-w-[896px] mx-auto">
         {/* Section Label */}
         <motion.p
           data-debug="metrics-label"
@@ -42,14 +43,7 @@ export default function Metrics() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#6B7280',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            fontSize: '12px',
-            marginBottom: '16px'
-          }}
+          className="text-muted uppercase tracking-[0.2em] text-xs mb-4"
         >
           04 — Metrics
         </motion.p>
@@ -61,14 +55,7 @@ export default function Metrics() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#2b145c',
-            fontSize: 'clamp(32px, 5vw, 44px)',
-            fontWeight: 700,
-            lineHeight: 1.15,
-            marginBottom: '32px'
-          }}
+          className="text-purple-deep text-[clamp(32px,5vw,44px)] font-bold leading-[1.15] mb-8"
         >
           Tracking the Flywheel
         </motion.h2>
@@ -80,34 +67,21 @@ export default function Metrics() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#6B7280',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            marginBottom: '64px',
-            maxWidth: '640px'
-          }}
+          className="text-muted text-lg leading-[1.75] mb-16 max-w-[640px]"
         >
           Each stage has a leading indicator that predicts momentum and a lagging outcome that confirms it. Here's how I'd know if the flywheel is spinning.
         </motion.p>
 
         {/* Metric Rows */}
         {metricRows.map((row, rowIndex) => (
-          <div key={row.header} data-debug={`metrics-row-${row.header.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} style={{ marginBottom: rowIndex < metricRows.length - 1 ? '48px' : '0' }}>
+          <div key={row.header} data-debug={`metrics-row-${row.header.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className={rowIndex < metricRows.length - 1 ? "mb-12" : ""}>
             {/* Row Header */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{
-                fontFamily: 'var(--font-general-sans)',
-                color: '#7b6baa',
-                fontSize: '11px',
-                letterSpacing: '0.15em',
-                marginBottom: '16px'
-              }}
+              className="text-purple-muted text-[11px] tracking-[0.15em] mb-4"
             >
               {row.header}
             </motion.p>
@@ -115,11 +89,7 @@ export default function Metrics() {
             {/* Cards Grid */}
             <div
               data-metrics-grid
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '16px'
-              }}
+              className="grid grid-cols-3 max-sm:grid-cols-1 gap-4"
             >
               {row.cards.map((card) => {
                 const currentIndex = cardIndex++
@@ -135,65 +105,29 @@ export default function Metrics() {
                       y: -2,
                       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
                     }}
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      borderRadius: '44px',
-                      padding: '24px',
-                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                      position: 'relative',
-                      cursor: 'default',
-                      transition: 'box-shadow 0.2s ease'
-                    }}
+                    className="bg-white rounded-[44px] p-6 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)] relative cursor-default transition-shadow"
                   >
                     {/* Indicator Dot */}
                     <div
                       data-metric-dot
-                      style={{
-                        position: 'absolute',
-                        top: '24px',
-                        right: '24px',
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        backgroundColor: card.type === 'leading' ? '#0066FF' : '#F59E0B'
-                      }}
+                      className={cn(
+                        "absolute top-6 right-6 w-2 h-2 rounded-full",
+                        card.type === 'leading' ? "bg-accent" : "bg-accent-warm"
+                      )}
                     />
 
                     {/* Metric Name */}
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-general-sans)',
-                        color: '#2b145c',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        marginBottom: '8px',
-                        paddingRight: '24px'
-                      }}
-                    >
+                    <h3 className="text-purple-deep text-base font-semibold mb-2 pr-6">
                       {card.name}
                     </h3>
 
                     {/* Description */}
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-general-sans)',
-                        color: '#7b6baa',
-                        fontSize: '14px',
-                        marginBottom: '16px'
-                      }}
-                    >
+                    <p className="text-purple-muted text-sm mb-4">
                       {card.description}
                     </p>
 
                     {/* Target Value */}
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-general-sans)',
-                        color: '#2b145c',
-                        fontSize: '14px',
-                        fontWeight: 500
-                      }}
-                    >
+                    <p className="text-purple-deep text-sm font-medium">
                       {card.target}
                     </p>
                   </motion.div>
@@ -210,62 +144,22 @@ export default function Metrics() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          style={{
-            display: 'flex',
-            gap: '24px',
-            marginTop: '32px',
-            justifyContent: 'flex-end'
-          }}
+          className="flex gap-6 mt-8 justify-end"
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: '#0066FF'
-              }}
-            />
-            <span
-              style={{
-                fontFamily: 'var(--font-general-sans)',
-                color: '#6B7280',
-                fontSize: '12px'
-              }}
-            >
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-accent" />
+            <span className="text-muted text-xs">
               Leading indicator
             </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: '#F59E0B'
-              }}
-            />
-            <span
-              style={{
-                fontFamily: 'var(--font-general-sans)',
-                color: '#6B7280',
-                fontSize: '12px'
-              }}
-            >
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-accent-warm" />
+            <span className="text-muted text-xs">
               Lagging outcome
             </span>
           </div>
         </motion.div>
       </div>
-
-      {/* Responsive styles for mobile */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          div[style*="grid-template-columns: repeat(3, 1fr)"] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }

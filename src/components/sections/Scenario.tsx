@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react'
 import { ChevronRight } from 'lucide-react'
+import { cn } from '@/lib/cn'
 
 const phases = [
   {
@@ -48,25 +49,17 @@ const phases = [
 
 export default function Scenario() {
   return (
-    <div data-scenario-wrapper style={{ padding: '24px' }}>
-      <section data-debug="scenario-section" data-scenario-card style={{ background: 'linear-gradient(180deg, #1E2A5E 0%, #2D3A8C 30%, #3B4AAE 60%, #5B3D9E 85%, #7C5CB8 100%)', color: '#E6EDF3', padding: '24px', borderRadius: '16px' }}>
-        <div style={{ maxWidth: '768px', margin: '0 auto' }}>
+    <div data-scenario-wrapper className="p-6">
+      <section data-debug="scenario-section" data-scenario-card className="gradient-scenario text-dark-text p-6 rounded-2xl">
+        <div className="max-w-[768px] mx-auto">
         {/* Section Label */}
         <motion.p
           data-debug="scenario-label"
-          className="md:mt-[48px]"
+          className="md:mt-12 text-gray-400 uppercase tracking-[0.2em] text-xs mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#9CA3AF',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            fontSize: '12px',
-            marginBottom: '16px'
-          }}
         >
           03 — Applied: The McDonald's Play
         </motion.p>
@@ -78,14 +71,7 @@ export default function Scenario() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            fontSize: '40px',
-            fontWeight: 600,
-            color: '#FFFFFF',
-            marginBottom: '24px',
-            lineHeight: '1.2'
-          }}
+          className="text-[40px] font-semibold text-white mb-6 leading-[1.2]"
         >
           Land One Location, Win the Network
         </motion.h2>
@@ -97,20 +83,14 @@ export default function Scenario() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            color: '#E6EDF3',
-            marginBottom: '64px'
-          }}
+          className="text-lg leading-[1.75] text-dark-text mb-16"
         >
           Here's how the lifecycle engine would power that motion:
         </motion.p>
 
         {/* Vertical Timeline */}
-        <div data-debug="scenario-timeline" style={{ position: 'relative' }}>
-          {/* Timeline Line */}
+        <div data-debug="scenario-timeline" className="relative">
+          {/* Timeline Line — keeps inline style for Framer Motion scaleY animation */}
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
@@ -136,96 +116,37 @@ export default function Scenario() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
-              style={{
-                position: 'relative',
-                paddingTop: '48px',
-                paddingLeft: '40px',
-                paddingBottom: index < phases.length - 1 ? '48px' : '0'
-              }}
+              className={cn(
+                "relative pt-12 pl-10",
+                index < phases.length - 1 ? "pb-12" : "pb-0"
+              )}
             >
               {/* Glassmorphic Time Label Pill */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '0',
-                  top: '0',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '100px',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                  padding: '8px 16px'
-                }}
-              >
+              <div className="absolute left-0 top-0 flex items-center gap-2 glass-pill py-2 px-4">
                 {/* Dot inside pill */}
-                <div
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    backgroundColor: '#FFFFFF',
-                    borderRadius: '50%',
-                    flexShrink: 0
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: 'var(--font-general-sans)',
-                    color: '#FFFFFF',
-                    fontSize: '11px',
-                    fontWeight: 500,
-                    letterSpacing: '0.1em',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
+                <div className="w-2 h-2 bg-white rounded-full shrink-0" />
+                <span className="text-white text-[11px] font-medium tracking-[0.1em] whitespace-nowrap">
                   {phase.time}
                 </span>
               </div>
 
               {/* Phase Title */}
-              <h3
-                style={{
-                  fontFamily: 'var(--font-general-sans)',
-                  color: '#FFFFFF',
-                  fontSize: '22px',
-                  fontWeight: 600,
-                  marginBottom: '16px'
-                }}
-              >
+              <h3 className="text-white text-[22px] font-semibold mb-4">
                 {phase.title}
               </h3>
 
               {/* Bullet Points */}
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <ul className="list-none p-0 m-0">
                 {phase.bullets.map((bullet, bulletIndex) => (
                   <li
                     key={bulletIndex}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '8px',
-                      marginBottom: '12px'
-                    }}
+                    className="flex items-start gap-2 mb-3"
                   >
                     <ChevronRight
                       size={16}
-                      style={{
-                        color: '#6B7280',
-                        marginTop: '4px',
-                        flexShrink: 0
-                      }}
+                      className="text-muted mt-1 shrink-0"
                     />
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-general-sans)',
-                        color: '#D1D5DB',
-                        fontSize: '16px',
-                        lineHeight: '1.6'
-                      }}
-                    >
+                    <span className="text-gray-300 text-base leading-[1.6]">
                       {bullet}
                     </span>
                   </li>

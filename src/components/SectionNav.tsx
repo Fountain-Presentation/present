@@ -49,57 +49,18 @@ export default function SectionNav() {
     }
   }, [])
 
-  const buttonStyle: React.CSSProperties = {
-    width: '56px',
-    height: '56px',
-    borderRadius: '50%',
-    backgroundColor: '#E4E4E7',
-    border: 'none',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all 0.2s ease',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
-  }
-
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: '32px',
-        right: '32px',
-        display: 'flex',
-        gap: '12px',
-        zIndex: 9999
-      }}
-    >
+    <div className="fixed bottom-8 right-8 flex gap-3 z-[9999]">
       <button
         onClick={() => scrollToSection('up')}
-        style={buttonStyle}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#D4D4D8'
-          e.currentTarget.style.transform = 'scale(1.05)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = '#E4E4E7'
-          e.currentTarget.style.transform = 'scale(1)'
-        }}
+        className="w-14 h-14 rounded-full bg-zinc-200 border-none cursor-pointer flex items-center justify-center transition-all shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:bg-zinc-300 hover:scale-105"
         aria-label="Previous section"
       >
         <ChevronUp size={24} color="#581C87" strokeWidth={2.5} />
       </button>
       <button
         onClick={() => scrollToSection('down')}
-        style={buttonStyle}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#D4D4D8'
-          e.currentTarget.style.transform = 'scale(1.05)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = '#E4E4E7'
-          e.currentTarget.style.transform = 'scale(1)'
-        }}
+        className="w-14 h-14 rounded-full bg-zinc-200 border-none cursor-pointer flex items-center justify-center transition-all shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:bg-zinc-300 hover:scale-105"
         aria-label="Next section"
       >
         <ChevronDown size={24} color="#581C87" strokeWidth={2.5} />

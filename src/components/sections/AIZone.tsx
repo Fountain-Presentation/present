@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Send } from 'lucide-react'
+import { cn } from '@/lib/cn'
 
 type Message = {
   role: 'user' | 'assistant'
@@ -101,26 +102,20 @@ export default function AIZone() {
     }
   }
 
+  const canSend = input.trim() && !isLoading
+
   return (
-    <div data-aizone-wrapper style={{ margin: '24px' }}>
-      <section data-debug="aizone-section" data-aizone-card className="rounded-[44px] md:rounded-[16px]" style={{ background: 'linear-gradient(to bottom right, #3B82F6 0%, #4F46E5 30%, #7C3AED 60%, #6B21A8 85%, #581C87 100%)', color: '#E6EDF3', padding: '24px' }}>
-      <div style={{ maxWidth: '768px', margin: '0 auto' }}>
+    <div data-aizone-wrapper className="m-6">
+      <section data-debug="aizone-section" data-aizone-card className="rounded-[44px] md:rounded-2xl gradient-hero text-dark-text p-6">
+      <div className="max-w-[768px] mx-auto">
         {/* Section Label */}
         <motion.p
           data-debug="aizone-label"
-          className="md:mt-[48px]"
+          className="md:mt-12 text-white/70 uppercase tracking-[0.2em] text-xs mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: 'rgba(255, 255, 255, 0.7)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            fontSize: '12px',
-            marginBottom: '16px'
-          }}
         >
           05 — Explore
         </motion.p>
@@ -132,14 +127,7 @@ export default function AIZone() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#FFFFFF',
-            fontSize: 'clamp(32px, 5vw, 44px)',
-            fontWeight: 700,
-            lineHeight: 1.15,
-            marginBottom: '32px'
-          }}
+          className="text-white text-[clamp(32px,5vw,44px)] font-bold leading-[1.15] mb-8"
         >
           Ask Me Anything
         </motion.h2>
@@ -151,13 +139,7 @@ export default function AIZone() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: 'rgba(255, 255, 255, 0.8)',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            marginBottom: '16px'
-          }}
+          className="text-white/80 text-lg leading-[1.75] mb-4"
         >
           This page covers the framework. But strategy lives in the details. I built this interactive layer so you can go deeper on anything — my thinking, my background, or how I'd apply this to a specific scenario.
         </motion.p>
@@ -169,49 +151,29 @@ export default function AIZone() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          style={{
-            display: 'flex',
-            gap: '12px',
-            marginBottom: '32px'
-          }}
+          className="flex gap-3 mb-8"
         >
           <button
             data-debug="aizone-btn-ama"
             onClick={() => handleModeChange('ama')}
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              fontSize: '14px',
-              fontWeight: 500,
-              padding: '12px 24px',
-              borderRadius: '100px',
-              border: mode === 'ama' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
-              backgroundColor: mode === 'ama' ? '#0066FF' : 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: mode === 'ama' ? 'none' : 'blur(12px)',
-              WebkitBackdropFilter: mode === 'ama' ? 'none' : 'blur(12px)',
-              color: mode === 'ama' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
+            className={cn(
+              "text-sm font-medium py-3 px-6 rounded-full cursor-pointer transition-all",
+              mode === 'ama'
+                ? "bg-accent text-white border-none"
+                : "glass text-white/90"
+            )}
           >
             Ask Me Anything
           </button>
           <button
             data-debug="aizone-btn-scenario"
             onClick={() => handleModeChange('scenario')}
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              fontSize: '14px',
-              fontWeight: 500,
-              padding: '12px 24px',
-              borderRadius: '100px',
-              border: mode === 'scenario' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
-              backgroundColor: mode === 'scenario' ? '#0066FF' : 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: mode === 'scenario' ? 'none' : 'blur(12px)',
-              WebkitBackdropFilter: mode === 'scenario' ? 'none' : 'blur(12px)',
-              color: mode === 'scenario' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
+            className={cn(
+              "text-sm font-medium py-3 px-6 rounded-full cursor-pointer transition-all",
+              mode === 'scenario'
+                ? "bg-accent text-white border-none"
+                : "glass text-white/90"
+            )}
           >
             Run a Scenario
           </button>
@@ -224,48 +186,24 @@ export default function AIZone() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            borderRadius: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-            overflow: 'hidden'
-          }}
+          className="glass rounded-3xl overflow-hidden"
         >
           {/* Messages Area */}
           <div
             data-debug="aizone-messages-area"
-            className="aizone-messages"
-            style={{
-              height: '384px',
-              overflowY: 'auto',
-              padding: '24px'
-            }}
+            className="aizone-messages h-96 overflow-y-auto p-6"
           >
             {messages.length === 0 ? (
               <div>
                 {/* Starter Chips */}
                 {mode === 'scenario' && (
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-general-sans)',
-                      color: 'rgba(255, 255, 255, 0.6)',
-                      fontSize: '14px',
-                      marginBottom: '16px'
-                    }}
-                  >
+                  <p className="text-white/60 text-sm mb-4">
                     Pick a franchise brand and I'll walk through the playbook:
                   </p>
                 )}
                 <div
                   data-debug="aizone-chips"
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '8px'
-                  }}
+                  className="flex flex-wrap gap-2"
                 >
                   {(mode === 'ama' ? amaChips : scenarioChips).map((chip) => (
                     <motion.button
@@ -273,17 +211,7 @@ export default function AIZone() {
                       onClick={() => handleChipClick(chip)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      style={{
-                        fontFamily: 'var(--font-general-sans)',
-                        fontSize: '14px',
-                        padding: '10px 16px',
-                        borderRadius: '20px',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        backgroundColor: 'transparent',
-                        color: '#E6EDF3',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease'
-                      }}
+                      className="text-sm py-2.5 px-4 rounded-[20px] border border-white/30 bg-transparent text-dark-text cursor-pointer transition-all"
                     >
                       {chip}
                     </motion.button>
@@ -291,7 +219,7 @@ export default function AIZone() {
                 </div>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div className="flex flex-col gap-4">
                 <AnimatePresence>
                   {messages.map((message, index) => (
                     <motion.div
@@ -299,23 +227,18 @@ export default function AIZone() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
-                      style={{
-                        display: 'flex',
-                        justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start'
-                      }}
+                      className={cn(
+                        "flex",
+                        message.role === 'user' ? "justify-end" : "justify-start"
+                      )}
                     >
                       <div
-                        style={{
-                          maxWidth: '85%',
-                          padding: '12px 16px',
-                          borderRadius: message.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-                          backgroundColor: message.role === 'user' ? '#0066FF' : 'rgba(255, 255, 255, 0.1)',
-                          color: '#E6EDF3',
-                          fontFamily: 'var(--font-general-sans)',
-                          fontSize: '15px',
-                          lineHeight: '1.6',
-                          whiteSpace: 'pre-wrap'
-                        }}
+                        className={cn(
+                          "max-w-[85%] py-3 px-4 text-dark-text text-[15px] leading-[1.6] whitespace-pre-wrap",
+                          message.role === 'user'
+                            ? "bg-accent rounded-2xl rounded-br-[4px]"
+                            : "bg-white/10 rounded-2xl rounded-bl-[4px]"
+                        )}
                       >
                         {message.content}
                       </div>
@@ -328,19 +251,10 @@ export default function AIZone() {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-start'
-                    }}
+                    className="flex justify-start"
                   >
-                    <div
-                      style={{
-                        padding: '12px 16px',
-                        borderRadius: '16px 16px 16px 4px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                      }}
-                    >
-                      <div style={{ display: 'flex', gap: '4px' }}>
+                    <div className="py-3 px-4 rounded-2xl rounded-bl-[4px] bg-white/10">
+                      <div className="flex gap-1">
                         {[0, 1, 2].map((i) => (
                           <motion.div
                             key={i}
@@ -353,12 +267,7 @@ export default function AIZone() {
                               repeat: Infinity,
                               delay: i * 0.15
                             }}
-                            style={{
-                              width: '8px',
-                              height: '8px',
-                              borderRadius: '50%',
-                              backgroundColor: '#6B7280'
-                            }}
+                            className="w-2 h-2 rounded-full bg-muted"
                           />
                         ))}
                       </div>
@@ -375,13 +284,7 @@ export default function AIZone() {
           <form
             data-debug="aizone-input-form"
             onSubmit={handleSubmit}
-            style={{
-              display: 'flex',
-              gap: '12px',
-              padding: '16px 24px',
-              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-              backgroundColor: 'rgba(0, 0, 0, 0.2)'
-            }}
+            className="flex gap-3 py-4 px-6 border-t border-white/10 bg-black/20"
           >
             <input
               data-debug="aizone-input-field"
@@ -391,35 +294,18 @@ export default function AIZone() {
               onKeyDown={handleKeyDown}
               placeholder={mode === 'ama' ? "Ask me anything..." : "Type a franchise name..."}
               disabled={isLoading}
-              style={{
-                flex: 1,
-                fontFamily: 'var(--font-general-sans)',
-                fontSize: '15px',
-                padding: '12px 16px',
-                borderRadius: '100px',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                color: '#E6EDF3',
-                outline: 'none'
-              }}
+              className="flex-1 text-[15px] py-3 px-4 rounded-full border border-white/20 bg-white/10 text-dark-text outline-none"
             />
             <button
               data-debug="aizone-send-btn"
               type="submit"
               disabled={isLoading || !input.trim()}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '48px',
-                height: '48px',
-                borderRadius: '100px',
-                border: 'none',
-                backgroundColor: input.trim() && !isLoading ? '#0066FF' : 'rgba(255, 255, 255, 0.1)',
-                color: input.trim() && !isLoading ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
-                cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
-                transition: 'all 0.2s ease'
-              }}
+              className={cn(
+                "flex items-center justify-center w-12 h-12 rounded-full border-none transition-all",
+                canSend
+                  ? "bg-accent text-white cursor-pointer"
+                  : "bg-white/10 text-white/50 cursor-not-allowed"
+              )}
             >
               <Send size={20} />
             </button>

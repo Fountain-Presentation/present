@@ -5,38 +5,19 @@ import { ChevronDown } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <div data-hero-wrapper className="hero-wrapper" style={{ margin: '24px', backgroundColor: '#F4F4F5' }}>
+    <div data-hero-wrapper className="hero-wrapper m-6 bg-zinc-100">
       <section
         data-debug="hero-section"
-        style={{
-          background: 'linear-gradient(to bottom right, #3B82F6 0%, #4F46E5 30%, #7C3AED 60%, #6B21A8 85%, #581C87 100%)',
-          color: '#FFFFFF',
-          minHeight: 'calc(100vh - 48px)',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '80px 24px',
-          position: 'relative'
-        }}
+        className="gradient-hero text-white min-h-[calc(100vh-48px)] rounded-2xl overflow-hidden flex flex-col items-center justify-center py-20 px-6 relative"
       >
-        <div data-debug="hero-content" style={{ maxWidth: '896px', margin: '0 auto', textAlign: 'center' }}>
+        <div data-debug="hero-content" className="max-w-[896px] mx-auto text-center">
           {/* Eyebrow */}
           <motion.p
             data-debug="hero-eyebrow"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              fontSize: '12px',
-              marginBottom: '16px',
-              opacity: 0.8
-            }}
+            className="uppercase tracking-[0.2em] text-xs mb-4 opacity-80"
           >
             Growth Strategy Brief — February 2026
           </motion.p>
@@ -47,14 +28,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              fontSize: 'clamp(40px, 6vw, 60px)',
-              fontWeight: 700,
-              lineHeight: 1.1,
-              marginBottom: '24px',
-              color: '#FFFFFF'
-            }}
+            className="text-[clamp(40px,6vw,60px)] font-bold leading-[1.1] mb-6 text-white"
           >
             How I'd Build Fountain's
             <br />
@@ -67,13 +41,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              fontSize: '18px',
-              maxWidth: '640px',
-              margin: '0 auto',
-              opacity: 0.9
-            }}
+            className="text-lg max-w-[640px] mx-auto opacity-90"
           >
             A lifecycle marketing framework for turning individual franchise operators into enterprise contracts. By Logan.
           </motion.p>
@@ -87,22 +55,7 @@ export default function Hero() {
             onClick={() => {
               document.getElementById('opportunity')?.scrollIntoView({ behavior: 'smooth' })
             }}
-            style={{
-              marginTop: '48px',
-              padding: '16px 32px',
-              fontFamily: 'var(--font-general-sans)',
-              fontSize: '16px',
-              fontWeight: 500,
-              color: '#FFFFFF',
-              background: 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '100px',
-              cursor: 'pointer',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-              transition: 'all 0.2s ease'
-            }}
+            className="mt-12 py-4 px-8 text-base font-medium text-white glass-pill cursor-pointer transition-all"
             whileHover={{
               background: 'rgba(255, 255, 255, 0.25)',
               scale: 1.02
@@ -119,11 +72,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          style={{
-            position: 'absolute',
-            bottom: '48px',
-            opacity: 0.7
-          }}
+          className="absolute bottom-12 opacity-70"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}

@@ -4,16 +4,12 @@ import { motion } from 'motion/react'
 
 export default function Closer() {
   return (
-    <section data-debug="closer-section" style={{ minHeight: '100vh', padding: '128px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+    <section data-debug="closer-section" className="min-h-screen px-6 py-32 flex flex-col justify-center">
+      <div className="max-w-[720px] mx-auto">
         {/* Horizontal Rule */}
         <div
           data-debug="closer-divider"
-          style={{
-            height: '1px',
-            backgroundColor: '#E5E7EB',
-            marginBottom: '64px'
-          }}
+          className="h-px bg-gray-200 mb-16"
         />
 
         {/* Main Paragraph */}
@@ -23,13 +19,7 @@ export default function Closer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#1A1A1A',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            marginBottom: '24px'
-          }}
+          className="text-text text-lg leading-[1.75] mb-6"
         >
           I built this because I think better by building. Four years as a founder taught me that the best way to show how you think is to ship something.
         </motion.p>
@@ -41,13 +31,7 @@ export default function Closer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#6B7280',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            marginBottom: '48px'
-          }}
+          className="text-muted text-lg leading-[1.75] mb-12"
         >
           This isn't a finished strategy — it's a starting point for conversation. I'd love to go deeper on any of this with you.
         </motion.p>
@@ -60,27 +44,14 @@ export default function Closer() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <p
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              color: '#1A1A1A',
-              fontSize: '20px',
-              fontWeight: 600,
-              marginBottom: '8px'
-            }}
-          >
+          <p className="text-text text-xl font-semibold mb-2">
             — Logan
           </p>
           <a
             href="https://www.linkedin.com/in/connerloganbell/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              fontFamily: 'var(--font-general-sans)',
-              color: '#0066FF',
-              fontSize: '14px',
-              textDecoration: 'none'
-            }}
+            className="text-accent text-sm no-underline"
           >
             linkedin.com/in/connerloganbell
           </a>
@@ -94,18 +65,9 @@ export default function Closer() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        style={{
-          marginTop: '96px',
-          textAlign: 'center'
-        }}
+        className="mt-24 text-center"
       >
-        <p
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#9CA3AF',
-            fontSize: '12px'
-          }}
-        >
+        <p className="text-gray-400 text-xs">
           Built with Next.js and Claude. February 2026.
         </p>
       </motion.footer>

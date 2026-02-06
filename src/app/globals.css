@@ -18,16 +18,48 @@
   --color-dark-bg: #0D1117;
   --color-dark-text: #E6EDF3;
   --color-muted: #6B7280;
+  --color-purple-deep: #2b145c;
+  --color-purple-muted: #7b6baa;
+  --color-purple-punchline: #2c0976;
+  --radius-card: 44px;
+  --font-sans: var(--font-general-sans), system-ui, sans-serif;
+}
+
+@utility gradient-hero {
+  background: linear-gradient(to bottom right, #3B82F6 0%, #4F46E5 30%, #7C3AED 60%, #6B21A8 85%, #581C87 100%);
+}
+
+@utility gradient-scenario {
+  background: linear-gradient(180deg, #1E2A5E 0%, #2D3A8C 30%, #3B4AAE 60%, #5B3D9E 85%, #7C5CB8 100%);
+}
+
+@utility glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@utility glass-pill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 html {
   background-color: #FAFAF8 !important;
   color: #1A1A1A;
+  overflow-x: hidden;
 }
 
 body {
   background-color: #FAFAF8 !important;
   color: #1A1A1A;
+  overflow-x: hidden;
   font-family: var(--font-general-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

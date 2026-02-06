@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { cn } from '@/lib/cn'
 
 const stages = [
   {
@@ -46,12 +47,12 @@ const stages = [
   }
 ]
 
-const tagColors: Record<string, { bg: string; text: string }> = {
-  PLG: { bg: '#DBEAFE', text: '#1D4ED8' },
-  PRODUCT: { bg: '#F3E8FF', text: '#7C3AED' },
-  DATA: { bg: '#D1FAE5', text: '#059669' },
-  LIFECYCLE: { bg: '#FEF3C7', text: '#D97706' },
-  SLG: { bg: '#FCE7F3', text: '#DB2777' }
+const tagStyles: Record<string, string> = {
+  PLG: 'bg-blue-100 text-blue-700',
+  PRODUCT: 'bg-purple-100 text-violet-600',
+  DATA: 'bg-emerald-100 text-emerald-600',
+  LIFECYCLE: 'bg-amber-100 text-amber-600',
+  SLG: 'bg-pink-100 text-pink-600'
 }
 
 interface StageCardProps {
@@ -62,10 +63,9 @@ interface StageCardProps {
   onMouseEnter: () => void
   onMouseLeave: () => void
   onClick: () => void
-  flex?: number
 }
 
-function StageCard({ stage, isExpanded, isLocked, onMouseEnter, onMouseLeave, onClick, flex = 1 }: StageCardProps) {
+function StageCard({ stage, isExpanded, isLocked, onMouseEnter, onMouseLeave, onClick }: StageCardProps) {
   return (
     <motion.div
       data-debug={`framework-card-${stage.number}`}
@@ -75,30 +75,26 @@ function StageCard({ stage, isExpanded, isLocked, onMouseEnter, onMouseLeave, on
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      style={{
-        flex,
-        backgroundColor: isExpanded ? '#F8FAFC' : '#FFFFFF',
-        borderRadius: '44px',
-        padding: '24px',
-        cursor: 'pointer',
-        textAlign: 'left',
-        transition: 'background-color 0.2s ease',
-        boxShadow: isExpanded
-          ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-          : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        overflow: 'hidden'
-      }}
+      className={cn(
+        "flex-1 rounded-[44px] p-6 cursor-pointer text-left transition-colors overflow-hidden",
+        isExpanded
+          ? "bg-slate-50 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)]"
+          : "bg-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]"
+      )}
     >
-      <p style={{ fontFamily: 'var(--font-general-sans)', color: '#D1D5DB', fontSize: '18px', fontWeight: 300, marginBottom: '8px' }}>
+      <p className="text-gray-300 text-lg font-light mb-2">
         {stage.number}
       </p>
-      <h3 style={{ fontFamily: 'var(--font-general-sans)', color: '#2b145c', fontSize: '16px', fontWeight: 600, marginBottom: '4px' }}>
+      <h3 className="text-purple-deep text-base font-semibold mb-1">
         {stage.title}
       </h3>
-      <p style={{ fontFamily: 'var(--font-general-sans)', color: '#7b6baa', fontSize: '13px', marginBottom: '12px' }}>
+      <p className="text-purple-muted text-[13px] mb-3">
         {stage.label}
       </p>
-      <span style={{ display: 'inline-block', backgroundColor: tagColors[stage.tag].bg, color: tagColors[stage.tag].text, fontFamily: 'var(--font-general-sans)', fontSize: '10px', fontWeight: 600, padding: '4px 8px', borderRadius: '4px', letterSpacing: '0.05em' }}>
+      <span className={cn(
+        "inline-block text-[10px] font-semibold py-1 px-2 rounded tracking-[0.05em]",
+        tagStyles[stage.tag]
+      )}>
         {stage.tag}
       </span>
 
@@ -109,25 +105,17 @@ function StageCard({ stage, isExpanded, isLocked, onMouseEnter, onMouseLeave, on
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
+            className="overflow-hidden"
           >
-            <div style={{ paddingTop: '16px', borderTop: '1px solid #E5E7EB', marginTop: '16px' }}>
-              <p
-                style={{
-                  fontFamily: 'var(--font-general-sans)',
-                  color: '#7b6baa',
-                  fontSize: '14px',
-                  lineHeight: '1.65',
-                  marginBottom: '12px'
-                }}
-              >
+            <div className="pt-4 border-t border-gray-200 mt-4">
+              <p className="text-purple-muted text-sm leading-[1.65] mb-3">
                 {stage.description}
               </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontFamily: 'var(--font-general-sans)', color: '#7b6baa', fontSize: '12px' }}>
+              <div className="flex items-center gap-1.5">
+                <span className="text-purple-muted text-xs">
                   Key metric:
                 </span>
-                <span style={{ fontFamily: 'var(--font-general-sans)', color: '#2b145c', fontSize: '12px', fontWeight: 600 }}>
+                <span className="text-purple-deep text-xs font-semibold">
                   {stage.metric}
                 </span>
               </div>
@@ -150,9 +138,9 @@ export default function Framework() {
   const handleClick = (index: number) => setLockedStage(lockedStage === index ? null : index)
 
   return (
-    <section data-debug="framework-section" style={{ padding: '24px' }}>
+    <section data-debug="framework-section" className="p-6">
       {/* Text content - narrower */}
-      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+      <div className="max-w-[720px] mx-auto">
         {/* Section Label */}
         <motion.p
           data-debug="framework-label"
@@ -160,14 +148,7 @@ export default function Framework() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#7b6baa',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            fontSize: '12px',
-            marginBottom: '16px'
-          }}
+          className="text-purple-muted uppercase tracking-[0.2em] text-xs mb-4"
         >
           02 — The Framework
         </motion.p>
@@ -179,14 +160,7 @@ export default function Framework() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#2b145c',
-            fontSize: 'clamp(32px, 5vw, 44px)',
-            fontWeight: 700,
-            lineHeight: 1.15,
-            marginBottom: '32px'
-          }}
+          className="text-purple-deep text-[clamp(32px,5vw,44px)] font-bold leading-[1.15] mb-8"
         >
           One operator becomes
           <br />
@@ -200,20 +174,14 @@ export default function Framework() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{
-            fontFamily: 'var(--font-general-sans)',
-            color: '#7b6baa',
-            fontSize: '18px',
-            lineHeight: '1.75',
-            marginBottom: '64px'
-          }}
+          className="text-purple-muted text-lg leading-[1.75] mb-16"
         >
           The land-and-expand playbook follows five stages. Each stage builds on the last — the output of one becomes the input of the next. That's what makes it a flywheel, not a funnel.
         </motion.p>
       </div>
 
       {/* Flywheel Diagram */}
-      <div data-framework-container style={{ maxWidth: '720px', margin: '0 auto' }}>
+      <div data-framework-container className="max-w-[720px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -221,9 +189,9 @@ export default function Framework() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {/* Grid layout: Row 1 (1&2), Row 2 (3), Row 3 (4&5) */}
-          <div data-debug="framework-grid" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div data-debug="framework-grid" className="flex flex-col gap-4">
             {/* Row 1: Cards 1 & 2 */}
-            <div data-framework-row style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+            <div data-framework-row className="flex gap-4 items-start">
               {[0, 1].map((index) => (
                 <StageCard
                   key={stages[index].number}
@@ -250,7 +218,7 @@ export default function Framework() {
             />
 
             {/* Row 3: Cards 4 & 5 */}
-            <div data-framework-row style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+            <div data-framework-row className="flex gap-4 items-start">
               {[3, 4].map((index) => (
                 <StageCard
                   key={stages[index].number}
