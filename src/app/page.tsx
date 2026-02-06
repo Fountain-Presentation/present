@@ -9,7 +9,7 @@ import SectionNav from "@/components/SectionNav";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-clip max-w-full">
       <Hero />
       <Context />
       <Framework />

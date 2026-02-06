@@ -53,13 +53,13 @@
 html {
   background-color: #FAFAF8 !important;
   color: #1A1A1A;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   background-color: #FAFAF8 !important;
   color: #1A1A1A;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: var(--font-general-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
