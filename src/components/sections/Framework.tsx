@@ -76,7 +76,7 @@ function StageCard({ stage, isExpanded, isLocked, onMouseEnter, onMouseLeave, on
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "flex-1 rounded-[44px] p-6 cursor-pointer text-left transition-colors overflow-hidden",
+        "w-full sm:flex-1 rounded-[44px] p-6 cursor-pointer text-left transition-colors overflow-hidden",
         isExpanded
           ? "bg-slate-50 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)]"
           : "bg-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]"
@@ -191,7 +191,7 @@ export default function Framework() {
           {/* Grid layout: Row 1 (1&2), Row 2 (3), Row 3 (4&5) */}
           <div data-debug="framework-grid" className="flex flex-col gap-4">
             {/* Row 1: Cards 1 & 2 */}
-            <div data-framework-row className="flex gap-4 items-start">
+            <div data-framework-row className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-start">
               {[0, 1].map((index) => (
                 <StageCard
                   key={stages[index].number}
@@ -218,7 +218,7 @@ export default function Framework() {
             />
 
             {/* Row 3: Cards 4 & 5 */}
-            <div data-framework-row className="flex gap-4 items-start">
+            <div data-framework-row className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-start">
               {[3, 4].map((index) => (
                 <StageCard
                   key={stages[index].number}

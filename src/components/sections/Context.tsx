@@ -5,7 +5,7 @@ import { motion } from 'motion/react'
 export default function Context() {
   return (
     <div data-section-wrapper="context" className="mb-6 sm:mx-6">
-      <section id="opportunity" data-debug="context-section" className="py-6 sm:px-6">
+      <section id="opportunity" data-debug="context-section" className="py-6 px-6">
       <div className="max-w-[720px] mx-auto">
         {/* Section Label */}
         <motion.p

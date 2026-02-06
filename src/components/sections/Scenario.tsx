@@ -49,8 +49,8 @@ const phases = [
 
 export default function Scenario() {
   return (
-    <div data-scenario-wrapper className="p-6">
-      <section data-debug="scenario-section" data-scenario-card className="gradient-scenario text-dark-text p-6 rounded-2xl">
+    <div data-scenario-wrapper className="sm:p-6">
+      <section data-debug="scenario-section" data-scenario-card className="gradient-scenario text-dark-text p-6 rounded-none sm:rounded-2xl">
         <div className="max-w-[768px] mx-auto">
         {/* Section Label */}
         <motion.p

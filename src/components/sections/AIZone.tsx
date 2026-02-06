@@ -105,8 +105,8 @@ export default function AIZone() {
   const canSend = input.trim() && !isLoading
 
   return (
-    <div data-aizone-wrapper className="m-6">
-      <section data-debug="aizone-section" data-aizone-card className="rounded-[44px] md:rounded-2xl gradient-hero text-dark-text p-6">
+    <div data-aizone-wrapper className="sm:m-6">
+      <section data-debug="aizone-section" data-aizone-card className="rounded-none sm:rounded-[44px] md:rounded-2xl gradient-hero text-dark-text p-6">
       <div className="max-w-[768px] mx-auto">
         {/* Section Label */}
         <motion.p
